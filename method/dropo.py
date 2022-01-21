@@ -19,17 +19,22 @@ class Dropo(object):
 	"""
 	Domain Randomization Off-Policy Optimization (DROPO)
 
-	Original implementation of DROPO as in the paper "DROPO: Sim-to-Real
+	Official implementation of DROPO as in the paper "DROPO: Sim-to-Real
 	Transfer with Offline Domain Randomization". View the file test_dropo.py
 	for a sample usage of the class.
 	Public repo at: https://github.com/gabrieletiboni/dropo
 	
-	Methods
+	Main methods
 	-------
-	optimize_dynamics_distribution(sound=None)
-	    Prints the animals name and what sound it makes
-	set_offline_dataset(self, T, indexes=None, n=None, sparse_mode=False)
-		Sets the offline state transitions used for running DROPO
+	optimize_dynamics_distribution()
+	    Starts the main DROPO optimization problem
+
+	set_offline_dataset()
+		Sets the offline dataset of transitions used for running DROPO
+
+	MSE(means), MSE_trajectories(means)
+		Compute the MSE in state space with <means> as dynamics parameters
+		(respectively for --sparse-mode and trajectory mode)
 	"""
 
 	def __init__(self,
@@ -41,15 +46,18 @@ class Dropo(object):
 		"""		
 		Parameters
 		----------
-		sim_env : gym simulated environment object,
+		sim_env : gym simulated environment object.
+
 		t_length : int,
 			Lambda hyperparameter as in our paper. Specifies how many
 			consecutive actions are executed for each likelihood evaluation.
+
 		seed : int, optional
-			seed for repeatibility of experiments.
+
 		scaling : boolean, optional
 			If True, each state observation dimension is rescaled to get similar
 			scaling across different dimensions.
+
 		sync_parall : boolean, optional
 			If True, explicitly adjust the number of evaluations in the opt.
 			problem	to match CMA's population size w.r.t. the number of
@@ -131,21 +139,19 @@ class Dropo(object):
 
 		if indexes is None:
 			if self.sparse_mode:
-				if n is None:
-					# Use all transitions in `T`
+				if n is None:	# Use all transitions in `T`
 					self.transitions = list(range(len(self.T['observations'])-self.t_length))
-				else:
-					# Get a subset of `n` sparse transitions randomly sampled in `T`
+
+				else:	# Get a subset of `n` sparse transitions randomly sampled in `T`
 					self.transitions = self._get_subset_sparse_transitions(n)
-			else:
-				# Use a subset of `n` TRAJECTORIES randomly sampled in `T`
-				# self.transitions = self._get_trajectories_indexes(n)
+
+			else:	# Get a subset of `n` trajectories randomly sampled in `T`
 				self.transitions = self._get_ordered_n_trajectories(n)
+
 		else:
 			self.transitions = indexes
 
-		# Fit scaler
-		if self.scaling:
+		if self.scaling:	# Fit scaler
 			self.scaler.fit(self.T['next_observations'])
 
 		return
@@ -740,7 +746,7 @@ class Dropo(object):
 
 
 	def _get_trajectories_indexes(self, n=None):
-		"""Returns index of start of each trajectory (episode)"""
+		"""Returns starting index of each trajectory"""
 
 		terminals = self.T['terminals']
 
@@ -758,14 +764,16 @@ class Dropo(object):
 		return ts
 
 	def _get_ordered_n_trajectories(self, n=None):
+		"""Returns indexes of n trajectories
+		randomly sampled from self.T"""
 
 		terminals = self.T['terminals']
 
 		arr = np.where(terminals==True)[0]
 
-		arr = np.insert(-1, 1, arr) # Insert first trajectory
-		arr = arr[:-1] # Remove last terminal state (no trajectory after it)
-		arr = arr+1 # Starting state is the one after the previous episode has finished
+		arr = np.insert(-1, 1, arr)   # Insert first trajectory
+		arr = arr[:-1]   # Remove last terminal state (no trajectory after it)
+		arr = arr+1   # Starting state is the one after the previous episode has finished
 
 		if n is not None:
 			ts = np.random.choice(arr, size=n, replace=False)
