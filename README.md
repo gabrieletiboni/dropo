@@ -69,14 +69,19 @@ Augment the simulated environment with the following methods to allow Domain Ran
 
 ### 3. Run test_dropo.py
 
-Sample file to launch DROPO. This repository contains a ready-to-use Hopper environment implementation and an associated offline dataset to run quick DROPO experiments on Hopper, with randomized link masses. The dataset consists of 20 trajectories collected on the ground truth hopper environment with mass values \[3.53429174, 3.92699082, 2.71433605, 5.0893801\].
+Sample file to launch DROPO.
+
+
+# Test DROPO on the Hopper environment
+
+This repository contains a ready-to-use Hopper environment implementation and an associated offline dataset to run quick DROPO experiments on Hopper, with randomized link masses. The dataset consists of 20 trajectories collected on the ground truth hopper environment with mass values \[3.53429174, 3.92699082, 2.71433605, 5.0893801\].
 
 E.g.:
 
 - Quick test (10 sparse transitions and 1000 obj. function evaluations only):
   > python3 test_dropo.py --sparse-mode -n 10 -l 1 --budget 1000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs
 
-- Advanced test (2 full episodes are considered, with 5000 obj. function evaluations, and 10 parallel workers):
+- Advanced test (2 trajectories are considered, with 5000 obj. function evaluations, and 10 parallel workers):
   > python3 test_dropo.py -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
 
 test_dropo.py will return the optimized domain randomization distribution, suitable for training a reinforcement learning policy on the same simulated environment.
