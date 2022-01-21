@@ -74,7 +74,7 @@ Sample file to launch DROPO.
 
 # Test DROPO on the Hopper environment
 
-This repository contains a ready-to-use Hopper environment implementation and an associated offline dataset to run quick DROPO experiments on Hopper, with randomized link masses. The dataset consists of 20 trajectories collected on the ground truth hopper environment with mass values \[3.53429174, 3.92699082, 2.71433605, 5.0893801\].
+This repository contains a ready-to-use Hopper environment implementation (based on the code from [OpenAI gym](https://github.com/openai/gym/tree/master/gym/envs/mujoco)) and an associated offline dataset to run quick DROPO experiments on Hopper, with randomized link masses. The dataset consists of 20 trajectories collected on the ground truth hopper environment with mass values \[3.53429174, 3.92699082, 2.71433605, 5.0893801\].
 
 E.g.:
 
