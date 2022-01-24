@@ -89,11 +89,12 @@ test_dropo.py will return the optimized domain randomization distribution, suita
 ## Cite us
 If you use this repository, please consider citing
 
-       @misc{,
-             title={}, 
-             author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
-             year={2021},
-             eprint={},
-             archivePrefix={},
-             primaryClass={}
-       }
+        @misc{tiboni2022dropo,
+              title={DROPO: Sim-to-Real Transfer with Offline Domain Randomization},
+              author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
+              year={2022},
+              eprint={2201.08434},
+              archivePrefix={arXiv},
+              primaryClass={cs.RO}
+        }
+
