@@ -59,7 +59,7 @@ Augment the simulated environment with the following methods to allow Domain Ran
 - `env.set_task(*new_task)` # Set new dynamics parameters
 - `env.get_task()` # Get current dynamics parameters
 - `mjstate = env.get_sim_state()` # Get current internal mujoco state
-- `env.get_initial_mjstate(state)` and `env.get_full_mjstate` # Get the internal mujoco state from given state
+- `env.get_initial_mjstate(state)` and `env.get_full_mjstate(state)` # Get the internal mujoco state from given state
 - `env.set_sim_state(mjstate)` # Set the simulator to a specific mujoco state
 
 - `env.set_task_search_bounds()` # Set the search bound for the mean of the dynamics parameters
