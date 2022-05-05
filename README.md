@@ -4,7 +4,7 @@ Implementation of Domain Randomization Off-Policy Optimization (DROPO) for arbit
 # DROPO: Sim-to-Real Transfer with Offline Domain Randomization
 ##### Gabriele Tiboni, Karol Arndt, Ville Kyrki.
 
-This repository contains the code for the paper: "DROPO: Sim-to-Real Transfer with Offline Domain Randomization" submitted to the IEEE Robotics and Automation Letters (RAL) Journal, in December 2021.
+This repository contains the code for the paper: "DROPO: Sim-to-Real Transfer with Offline Domain Randomization" submitted to the IEEE Robotics and Automation Letters (RAL) Journal.<!-- , in December 2021. -->
 
 *Abstract:* In recent years, domain randomization has gained a lot of traction as a method for sim-to-real transfer of reinforcement learning policies; however, coming up with optimal randomization ranges can be difficult.
 In this paper, we introduce DROPO, a novel method for estimating domain randomization ranges for a safe sim-to-real transfer.
@@ -89,11 +89,12 @@ test_dropo.py will return the optimized domain randomization distribution, suita
 ## Cite us
 If you use this repository, please consider citing
 
-       @misc{,
-             title={}, 
-             author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
-             year={2021},
-             eprint={},
-             archivePrefix={},
-             primaryClass={}
-       }
+        @misc{tiboni2022dropo,
+              title={DROPO: Sim-to-Real Transfer with Offline Domain Randomization},
+              author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
+              year={2022},
+              eprint={2201.08434},
+              archivePrefix={arXiv},
+              primaryClass={cs.RO}
+        }
+
