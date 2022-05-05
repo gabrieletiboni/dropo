@@ -528,18 +528,8 @@ class Dropo(object):
 
 				
 				for j in range(t, t+lambda_steps):
-					if hasattr(self.sim_env, 'set_puck2_state'):
-						self.sim_env.set_sim_state(self.sim_env.set_puck2_state(self.T['observations'][j][14:18], self.sim_env.get_sim_state()))
-
 					action = self.T['actions'][j]
 					s_prime, reward, done, _ = self.sim_env.step(action)
-
-					if hasattr(self.sim_env, 'set_puck2_state'):
-						self.sim_env.set_sim_state(self.sim_env.set_puck2_state(self.T['observations'][j+1][14:18], self.sim_env.get_sim_state()))
-
-					if self.T['terminals'][j] == True:
-						print('WARNING (2), SOMETHING IS OFF AS THE NEXT OBSERVATION TAKEN IS FROM A NEW EPISODE')
-						sys.exit()
 
 				mapped_sample = np.array(s_prime)
 
@@ -713,7 +703,7 @@ class Dropo(object):
 				upper_bound = 1000000000
 
 			
-			# Make sure all samples are belonging to [lower_bound, upper_bound]
+			# Make sure all samples belong to [lower_bound, upper_bound]
 			attempts = 0
 			obs = truncnorm.rvs(a, b, loc=mean, scale=std, size=size)
 			while np.any((obs<lower_bound) | (obs>upper_bound)):
@@ -726,7 +716,6 @@ class Dropo(object):
 					obs[obs > upper_bound] = upper_bound
 					print(f"Warning - Not all samples were above >= {lower_bound} or below {upper_bound} after 20 attempts. Setting them to their min/max bound values, respectively.")
 
-					pdb.set_trace()
 			sample.append(obs)
 
 		return np.array(sample).T
