@@ -26,10 +26,10 @@ class Dropo(object):
 	
 	Main methods
 	-------
-	optimize_dynamics_distribution()
+	optimize_dynamics_distribution(...)
 	    Starts the main DROPO optimization problem
 
-	set_offline_dataset()
+	set_offline_dataset(...)
 		Sets the offline dataset of transitions used for running DROPO
 
 	MSE(means), MSE_trajectories(means)
