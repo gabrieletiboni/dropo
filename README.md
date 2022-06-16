@@ -18,7 +18,7 @@ We also evaluate the method on two zero-shot sim-to-real transfer scenarios, sho
 
 This repository makes use of the following external libraries:
 - [Nevergrad](https://github.com/facebookresearch/nevergrad)
-- [Mujoco](https://mujoco.org/)
+- [Mujoco-py](https://github.com/openai/mujoco-py)
 
 <!-- We additionally provide the requirement (requirements.txt) file. -->
 
