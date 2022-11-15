@@ -7,7 +7,6 @@ from multiprocessing import Pool
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-import seaborn as sns
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from scipy.stats import multivariate_normal
@@ -42,7 +41,8 @@ class Dropo(object):
 				 t_length,
 				 seed=0,
 				 scaling=False,
-				 sync_parall=True):
+				 sync_parall=True,
+				 clip_state=None):
 		"""		
 		Parameters
 		----------
@@ -79,6 +79,8 @@ class Dropo(object):
 		self.T = None
 		self.seed = seed
 		self.sync_parall = sync_parall
+
+		self.clip_state = clip_state
 
 		return
 	
@@ -549,6 +551,11 @@ class Dropo(object):
 			mapped_sample = mapped_sample_per_transition[k]
 			target_ob_prime = target_ob_prime_per_transition[k]
 
+			# if hasattr(self.sim_env, 'set_static_goal'):
+			if self.clip_state is not None:
+				mapped_sample = mapped_sample[:, :self.clip_state]
+				target_ob_prime = target_ob_prime[:self.clip_state]
+
 			# Infer next-state distribution parameters
 			cov_matrix = np.cov(mapped_sample, rowvar=0)
 			mean = np.mean(mapped_sample, axis=0)
@@ -765,7 +772,8 @@ class Dropo(object):
 		arr = arr+1   # Starting state is the one after the previous episode has finished
 
 		if n is not None:
-			ts = np.random.choice(arr, size=n, replace=False)
+			# ts = np.random.choice(arr, size=n, replace=False)
+			ts = arr[:n]
 		else:
 			ts = list(arr)
 

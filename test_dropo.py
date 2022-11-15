@@ -1,14 +1,17 @@
-"""Test of DROPO in the gym Hopper environment
+"""Test of DROPO
 
-For this sim2sim case, a dataset has been collected offline
-from the Hopper-v2 gym environment with a semi-converged policy.
-The randomized parameters are the four link masses of the Hopper.
+For the RandomHopperMass environment, a dataset has been collected offline
+from with a semi-converged policy and made available in datasets/.
+
+This repo needs the random_envs package installed.
 
 Examples:
 	
-	[Quick test] python3 test_dropo.py --sparse-mode -n 10 -l 1 --budget 1000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs
+	[Quick test] python3 test_dropo.py --env RandomHopper-v0 --sparse-mode -n 10 -l 1 --budget 1000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs
 
-	[Advanced test] python3 test_dropo.py -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
+	[Advanced test] python3 test_dropo.py --env RandomHopper-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
+
+	[Unmodeled environment test] python3 test_dropo.py --env RandomHopperUnmodeled-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-3 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
 
 """
 import glob
@@ -17,28 +20,23 @@ import pdb
 from datetime import datetime
 
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
 import gym
+from dropo import Dropo
+import random_envs
 
-from method.dropo import Dropo
-from utils.utils import *
-from randommasshopper.random_mass_hopper import *
+from utils import *
 
 def main():
 
 	args = parse_args_dropo()
 	set_seed(args.seed)
 
-	sim_env = gym.make('RandomMassHopper-v0')
+	sim_env = gym.make(args.env)
 
 	print('Action space:', sim_env.action_space)
 	print('State space:', sim_env.observation_space)
 	print('Initial dynamics:', sim_env.get_task())
 	print('\nARGS:', vars(args))
-
-	target_task = [3.53429174, 3.92699082, 2.71433605, 5.0893801]   # Ground truth target domain task to learn (in sim2real is not known a priori)
-	print('Target task to learn:', target_task)
 
 	observations = np.load(glob.glob(os.path.join(args.dataset, '*_observations.npy'))[0])
 	next_observations = np.load(glob.glob(os.path.join(args.dataset, '*_nextobservations.npy'))[0])
@@ -57,7 +55,6 @@ def main():
 
 	# Load target offline dataset
 	dropo.set_offline_dataset(T, n=args.n_trajectories, sparse_mode=args.sparse_mode)
-
 
 	# Run DROPO
 	(best_bounds,
@@ -97,7 +94,6 @@ def main():
 	else:
 		print('MSE:', dropo.MSE_trajectories(dropo.get_means(best_bounds)))
 
-	print('Squared distance between best means and target task:', np.linalg.norm(target_task - dropo.get_means(best_bounds)))
 	print('Elapsed:', round(elapsed/60, 4), 'min')
  
 
@@ -124,7 +120,6 @@ def main():
 			else:
 				print('MSE:', dropo.MSE_trajectories(dropo.get_means(best_bounds)), file=file)
 
-			print('Squared distance between best means and target task:', np.linalg.norm(target_task - dropo.get_means(best_bounds)), file=file)
 			print('Elapsed:', round(elapsed/60, 4), 'min', file=file)
 
 
