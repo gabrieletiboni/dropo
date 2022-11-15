@@ -15,7 +15,7 @@ def parse_args_dropo():
 	parser.add_argument("--n-trajectories", "-n", type=int, default=None, help="Number of target trajectories for running DROPO. if --sparse-mode is selected, this parameter refers to the number of single TRANSITIONS instead.")
 	parser.add_argument("-l", type=int, default=1, help="Lambda hyperparameter.")
 	parser.add_argument("--epsilon", "-eps", type=float, default=1e-3, help="RECOMMENDED. Epsilon hyperparameter. Valid only when --additive_variance is set (default: 1e-3)")
-	parser.add_argument('--env', default='RandomMassHopper-v0', type=str, help='Gym env to use')
+	parser.add_argument('--env', default='RandomHopper-v0', type=str, help='Gym-registered environment.')
 	parser.add_argument("--output-dir", type=str, default='output', help="Output directory for results")
 	parser.add_argument("--scaling", default=False, action='store_true', help="Scaling each state dimension (Default: False)")
 	parser.add_argument("--now", type=int, default=1, help="Number of workers for parallelization (Default: 1 => no parallelization)")

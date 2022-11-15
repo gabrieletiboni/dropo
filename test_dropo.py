@@ -1,18 +1,16 @@
 """Test of DROPO
 
-For the RandomHopperMass environment, a dataset has been collected offline
-from with a semi-converged policy and made available in datasets/.
-
-This repo needs the random_envs package installed.
+Install the random-envs package (https://github.com/gabrieletiboni/random-envs)
+to test this script on the OpenAI Gym Hopper environment. A dataset of target
+trajectories from the Hopper environment has already been collected offline
+by a semi-converged policy and made available in datasets/ dir.
 
 Examples:
-	
-	[Quick test] python3 test_dropo.py --env RandomHopper-v0 --sparse-mode -n 10 -l 1 --budget 1000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs
+	[Quick test] python test_dropo.py --env RandomHopper-v0 --sparse-mode -n 10 -l 1 --budget 1000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs
 
-	[Advanced test] python3 test_dropo.py --env RandomHopper-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
+	[Advanced test] python test_dropo.py --env RandomHopper-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
 
-	[Unmodeled environment test] python3 test_dropo.py --env RandomHopperUnmodeled-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-3 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
-
+	[Unmodeled environment test] python test_dropo.py --env RandomHopperUnmodeled-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-3 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
 """
 import glob
 import sys
@@ -21,8 +19,11 @@ from datetime import datetime
 
 import numpy as np
 import gym
+try:
+    import random_envs
+except ImportError as e:
+    raise error.DependencyNotInstalled(f"Install random-envs from https://github.com/gabrieletiboni/random-envs to test DROPO on the OpenAI gym Hopper environment")
 from dropo import Dropo
-import random_envs
 
 from utils import *
 
@@ -33,8 +34,8 @@ def main():
 
 	sim_env = gym.make(args.env)
 
-	print('Action space:', sim_env.action_space)
 	print('State space:', sim_env.observation_space)
+	print('Action space:', sim_env.action_space)
 	print('Initial dynamics:', sim_env.get_task())
 	print('\nARGS:', vars(args))
 

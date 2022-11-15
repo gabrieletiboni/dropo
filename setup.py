@@ -5,4 +5,3 @@ setup(name='dropo',
       install_requires=['numpy','nevergrad'],  # And any other dependencies foo needs
       packages=find_packages(exclude=["datasets"])
 )
-

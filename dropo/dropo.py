@@ -19,6 +19,7 @@ class Dropo(object):
 	Transfer with Offline Domain Randomization". View the file test_dropo.py
 	for a sample usage of the class.
 	Public repo at: https://github.com/gabrieletiboni/dropo
+	Manuscript: https://arxiv.org/abs/2201.08434
 	
 	Main methods
 	-------
@@ -43,7 +44,7 @@ class Dropo(object):
 		"""		
 		Parameters
 		----------
-		sim_env : gym simulated environment object.
+		sim_env : gym-registered environment object.
 
 		t_length : int,
 			Lambda hyperparameter as in our paper. Specifies how many
