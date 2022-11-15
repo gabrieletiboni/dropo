@@ -14,14 +14,21 @@ We also evaluate the method on two zero-shot sim-to-real transfer scenarios, sho
 
 ![dropo_general_framework](https://www.gabrieletiboni.com/assets/dropo_framework_general.png)
 
-# Requirements
+# Installation
 
 This repository makes use of the following external libraries:
 - [Nevergrad](https://github.com/facebookresearch/nevergrad)
-- [Mujoco-py](https://github.com/openai/mujoco-py)
 
-<!-- We additionally provide the requirement (requirements.txt) file. -->
+Dropo currently only supports gym environments registered with the old APIs gym<=0.25. Refer to the [compatibility](https://gymnasium.farama.org/content/gym_compatibility/) guidelines for running newly registered gym environments with this implementation.
 
+Install DROPO:
+```
+  cd dropo
+  pip install -r requirements.txt
+  pip install .
+```
+
+Test this implementation on the OpenAI gym Hopper environment with `test_dropo.py` (see below).
 
 # How to launch DROPO
 
@@ -69,32 +76,36 @@ Augment the simulated environment with the following methods to allow Domain Ran
 
 ### 3. Run test_dropo.py
 
-Sample file to launch DROPO.
+Sample file to launch DROPO on custom gym-registered environments (gym<=0.25). To parallelize DROPO execution, use the dedicated `--now` dropo parameter instead of vectorized gym environments.
 
 
 # Test DROPO on the Hopper environment
 
-This repository contains a ready-to-use Hopper environment implementation (based on the code from [OpenAI gym](https://github.com/openai/gym/tree/master/gym/envs/mujoco)) and an associated offline dataset to run quick DROPO experiments on Hopper, with randomized link masses. The dataset consists of 20 trajectories collected on the ground truth hopper environment with mass values \[3.53429174, 3.92699082, 2.71433605, 5.0893801\].
-
+You can test DROPO out-of-the-box on the OpenAI gym Hopper environment with `test_dropo.py --env RandomHopper-v0` (requires [random-envs](https://github.com/gabrieletiboni/random-envs) package and mujoco installed on your system). A corresponding offline dataset of 20 trajectories has already been collected by a semi-converged policy and made available in datasets/ dir.
 E.g.:
 
 - Quick test (10 sparse transitions and 1000 obj. function evaluations only):
-  > python3 test_dropo.py --sparse-mode -n 10 -l 1 --budget 1000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs
+  > python test_dropo.py --env RandomHopper-v0 --sparse-mode -n 10 -l 1 --budget 1000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs
 
 - Advanced test (2 trajectories are considered, with 5000 obj. function evaluations, and 10 parallel workers):
-  > python3 test_dropo.py -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
+  > python test_dropo.py --env RandomHopper-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
 
-test_dropo.py will return the optimized domain randomization distribution, suitable for training a reinforcement learning policy on the same simulated environment.
+- Advanced test with unmodeled environment variant:
+  > python test_dropo.py --env RandomHopperUnmodeled-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-3 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
+
+`test_dropo.py` will return the optimized domain randomization distribution, suitable for training a reinforcement learning policy on the same simulated environment.
+
 
 ## Cite us
 If you use this repository, please consider citing
 
-        @misc{tiboni2022dropo,
-              title={DROPO: Sim-to-Real Transfer with Offline Domain Randomization},
-              author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
-              year={2022},
-              eprint={2201.08434},
-              archivePrefix={arXiv},
-              primaryClass={cs.RO}
-        }
-
+```
+@misc{tiboni2022dropo,
+  title={DROPO: Sim-to-Real Transfer with Offline Domain Randomization},
+  author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
+  year={2022},
+  eprint={2201.08434},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO}
+}
+```
