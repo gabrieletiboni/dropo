@@ -23,9 +23,9 @@ Dropo currently only supports gym environments registered with the old APIs gym<
 
 Install DROPO:
 ```
-  cd dropo
-  pip install -r requirements.txt
-  pip install .
+cd dropo
+pip install -r requirements.txt
+pip install .
 ```
 
 Test this implementation on the OpenAI gym Hopper environment with `test_dropo.py` (see below).
@@ -90,7 +90,7 @@ E.g.:
 - Advanced test (2 trajectories are considered, with 5000 obj. function evaluations, and 10 parallel workers):
   > python test_dropo.py --env RandomHopper-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-5 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
 
-- Advanced test with unmodeled environment variant:
+- Advanced test on the unmodeled Hopper variant:
   > python test_dropo.py --env RandomHopperUnmodeled-v0 -n 2 -l 1 --budget 5000 -av --epsilon 1e-3 --seed 100 --dataset datasets/hopper10000 --normalize --logstdevs --now 10
 
 `test_dropo.py` will return the optimized domain randomization distribution, suitable for training a reinforcement learning policy on the same simulated environment.
