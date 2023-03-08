@@ -101,11 +101,10 @@ If you use this repository, please consider citing
 
 ```
 @misc{tiboni2022dropo,
-  title={DROPO: Sim-to-Real Transfer with Offline Domain Randomization},
-  author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
-  year={2022},
-  eprint={2201.08434},
-  archivePrefix={arXiv},
-  primaryClass={cs.RO}
+  title = {DROPO: Sim-to-Real Transfer with Offline Domain Randomization},
+  author = {Tiboni, Gabriele and Arndt, Karol and Kyrki, Ville},
+  doi = {10.48550/ARXIV.2201.08434},
+  publisher = {arXiv},
+  year = {2022}
 }
 ```
