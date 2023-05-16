@@ -2,9 +2,10 @@
 Implementation of Domain Randomization Off-Policy Optimization (DROPO) for arbitrary offline datasets. DROPO shortens the reality gap when learning reinforcement learning policies in a sim-to-real setting.
  -->
 # DROPO: Sim-to-Real Transfer with Offline Domain Randomization
-##### Gabriele Tiboni, Karol Arndt, Ville Kyrki.
+##### Gabriele Tiboni, Karol Arndt, Ville Kyrki
+##### Robotics and Autonomous Systems
 
-This repository contains the code for the [paper](https://arxiv.org/abs/2201.08434): "DROPO: Sim-to-Real Transfer with Offline Domain Randomization".
+This repository contains the code for the [paper](https://www.sciencedirect.com/science/article/pii/S0921889023000714): "DROPO: Sim-to-Real Transfer with Offline Domain Randomization".
 
 *Abstract:* In recent years, domain randomization has gained a lot of traction as a method for sim-to-real transfer of reinforcement learning policies; however, coming up with optimal randomization ranges can be difficult.
 In this paper, we introduce DROPO, a novel method for estimating domain randomization ranges for a safe sim-to-real transfer.
@@ -100,12 +101,15 @@ E.g.:
 If you use this repository, please consider citing
 
 ```
-@misc{tiboni2022dropo,
-  title={DROPO: Sim-to-Real Transfer with Offline Domain Randomization},
-  author={Gabriele Tiboni and Karol Arndt and Ville Kyrki},
-  year={2022},
-  eprint={2201.08434},
-  archivePrefix={arXiv},
-  primaryClass={cs.RO}
+@article{tiboni2022dropo,
+title = {DROPO: Sim-to-real transfer with offline domain randomization},
+journal = {Robotics and Autonomous Systems},
+pages = {104432},
+year = {2023},
+issn = {0921-8890},
+doi = {https://doi.org/10.1016/j.robot.2023.104432},
+url = {https://www.sciencedirect.com/science/article/pii/S0921889023000714},
+author = {Gabriele Tiboni and Karol Arndt and Ville Kyrki},
+keywords = {Robot learning, Transfer learning, Reinforcement learning, Domain randomization}
 }
 ```
