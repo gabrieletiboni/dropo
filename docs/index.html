@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <title>DROPO: Sim-to-Real Transfer with Offline Domain Randomization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"  />
+    <link rel="stylesheet" type="text/css" href="assets/css/animatedBackground.css"  />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="citePopup">
+      <div id="citePopupContent">
+        <p>If you refer to DROPO in your works or you use our Github repository, please consider citing:</p>
+          <div class="bibtexContainer">  
+<pre>@article{tiboni2022dropo,
+  title = {DROPO: Sim-to-real transfer with offline domain randomization},
+  journal = {Robotics and Autonomous Systems},
+  pages = {104432},
+  year = {2023},
+  issn = {0921-8890},
+  doi = {https://doi.org/10.1016/j.robot.2023.104432},
+  url = {https://www.sciencedirect.com/science/article/pii/S0921889023000714},
+  author = {Gabriele Tiboni and Karol Arndt and Ville Kyrki},
+  keywords = {Robot learning, Transfer learning, Reinforcement learning, Domain randomization}
+}</pre>
+          </div>
+          <i id="closePopupIcon">&times;</i>
+      </div>
+    </div>
+
+    <header>
+      <div id="animContainer"></div>
+      <div id="headerBackground"></div>
+
+      <div id="elevatedContent">
+        <h1>DROPO: Sim-to-Real Transfer with<br/>Offline Domain Randomization</h1>
+        <h3>Robotics and Autonomous Systems, 2023</h3>
+
+        <div id="linksContainer">
+          <a href="https://www.sciencedirect.com/science/article/pii/S0921889023000714" target="_blank" class="iconLink">Paper <img src="assets/img/paper_icon2_64px.png"/></a>
+          <a href="https://github.com/gabrieletiboni/dropo" target="_blank" class="iconLink">Code <img src="assets/img/github_logo_light_64px.png"/></a>
+          <!-- <a href="#contributionsSection">Contributions</a> -->
+          <a href="#findingsSection">Highlights</a>
+          <a class="linkLike openCitePopup">Cite</a>
+        </div>
+      </div>
+
+      <div id="videoContainer">
+        <div>
+          <video controls>
+            <source src="assets/video/dropo_video_v1_trimmed_official.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </header>
+
+    <section id="main">
+      <div id="intro">
+        <p>
+          <strong><em>Abstract</em></strong><br/>
+          In recent years, domain randomization has gained a lot of traction as a method for sim-to-real transfer of reinforcement learning policies; however, coming up with optimal randomization ranges can be difficult.
+In this paper, we introduce DROPO, a novel method for estimating domain randomization ranges for a safe sim-to-real transfer.
+Unlike prior work, DROPO only requires a precollected offline dataset of trajectories, and does not converge to point estimates.
+We demonstrate that DROPO is capable of recovering dynamic parameter distributions in simulation and finding a distribution capable of compensating for an unmodelled phenomenon.
+We also evaluate the method on two zero-shot sim-to-real transfer scenarios, showing a successful domain transfer and improved performance over prior methods.
+        </p>
+        <br/>
+        <p style="font-style: italic;">Authored by <a href="https://gabrieletiboni.com/" target="_blank" class="easyLink">Gabriele Tiboni</a>, <a href="https://scholar.google.com/citations?user=yBxCckoAAAAJ&hl=en" target="_blank" class="easyLink">Karol Arndt</a>, <a href="https://scholar.google.com/citations?hl=en&user=8OBnyXQAAAAJ" target="_blank" class="easyLink">Ville Kyrki</a>.
+        </p>
+      </div>
+
+      <div id="introImg">
+        <span>
+          <img src="assets/img/dropo_overview.png">
+        </span>
+        <span>
+          DROPO uses off-policy data (e.g. human demonstrations) to learn a domain randomization distribution,<br/>
+          which is later used to train a policy that can be directly transferred to the real world.
+        </span>
+      </div>
+
+      <!-- <div class="tab" id="contributionsSection">
+        <h2>Contributions</h2>
+        <ul class="easyUl">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ul>
+        <p class="comingSoon">
+          Coming Soon
+        </p>
+      </div> -->
+
+      <div class="tab" id="findingsSection">
+          <h2>Highlights</h2>
+          <div class="main-list">
+            <span>
+              <span class="index">#1</span>
+              <span class="content">
+                <span class="title">
+                  A novel method for estimating dynamics parameters distributions from offline collected real-world data is presented.
+                </span>
+                <!-- <span class="descr">
+                  
+                </span> -->
+              </span>
+            </span>
+            <span>
+              <span class="index">#2</span>
+              <span class="content">
+                <span class="title">
+                  Robot policies trained with DROPO can efficiently transfer to the real world.
+                </span>
+                <!-- <span class="descr">
+                 While successfully solving the Hopper task, Bayesian optimization (BayRN) would not scale to high-dimensional inference tasks with only 5 iterations. Such tasks include Half Cheetah, Walker2D and Humanoid which require inference of posterior distributions over 8, 13 and 30 dynamics parameters respectively.  
+                </span> -->
+              </span>
+              
+            </span>
+            <span>
+              <span class="index">#3</span>
+              <span class="content">
+                <span class="title">
+                  Human demonstrations can be used for safe and data-efficient simulator tuning.
+                </span>
+                <!-- <span class="descr">
+                  Online methods such as BayRN and SimOpt may fail unexpectedly when policies learned at intermediate iterations fail to transfer to the target domain and do not collect informative data for inferring the desired dynamics parameters. This phenomenon occurred more frequently in complex tasks, e.g. Humanoid.
+                </span> -->
+              </span>
+            </span>
+            <span>
+              <span class="index">#4</span>
+              <span class="content">
+                <span class="title">
+                  Probabilistic metrics are crucial for optimizing dynamics parameters distributions. 
+                </span>
+                <!-- <span class="descr">
+                  Offline methods would sometimes produce meaningless results when real-world commands are replayed in simulation (open loop) on missmatched dynamics, leading to divergent trajectories.<br/>
+                  Resetting the simulator state to each individual starting state when replaying offline trajectories—as in DROPO—seemed to solve the issue completely.
+                </span> -->
+              </span>
+            </span>
+          </div> 
+      </div>
+
+      <!-- <div class="tab">
+          <h2>Conclusions</h2>
+          <p class="comingSoon">
+            Coming Soon
+          </p>
+      </div> -->
+
+      <div class="tab">
+          <h2>Citing</h2>
+          <!-- <p class="comingSoon">
+            Coming Soon
+          </p> -->
+          <div class="bibtexContainer">
+<pre>@article{tiboni2022dropo,
+  title = {DROPO: Sim-to-real transfer with offline domain randomization},
+  journal = {Robotics and Autonomous Systems},
+  pages = {104432},
+  year = {2023},
+  issn = {0921-8890},
+  doi = {https://doi.org/10.1016/j.robot.2023.104432},
+  url = {https://www.sciencedirect.com/science/article/pii/S0921889023000714},
+  author = {Gabriele Tiboni and Karol Arndt and Ville Kyrki},
+  keywords = {Robot learning, Transfer learning, Reinforcement learning, Domain randomization}
+}</pre>
+          </div>
+      </div>
+    </section>
+
+    <footer>
+      If you have any questions, please contact us at <a href="mailto:gabriele.tiboni@polito.it" class="easyLink">gabriele.tiboni@polito.it</a>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+      const init_brad = 35;
+      $('#headerBackground').css("border-radius", init_brad+"%");
+      $('#animContainer').css("border-radius", init_brad+"%");
+
+      // check if viewport is mobile or desktop
+      const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+      const isTablet = window.matchMedia("only screen and (max-width: 1024px)").matches;
+      
+
+      function init() {
+        loadAnimatedBackground();
+
+        if (!isMobile && !isTablet) {
+          $('body').on('scroll', function() {
+            var scroll = $('body').scrollTop();
+            var viewportHeight = $(window).height();  // get viewport height
+
+            // max_brad = 35;
+            new_brad = init_brad - ((init_brad/viewportHeight) * scroll)
+            if (scroll <= viewportHeight) {
+              $("#headerBackground").css("border-radius", new_brad+"%");
+              $('#animContainer').css("border-radius", new_brad+"%");
+            }
+          });
+        }
+      }
+
+      //scroll to div
+      $('a[href^="#"]').on('click', function(event) {
+
+          var target = $( $(this).attr('href') );
+
+          if( target.length ) {
+              event.preventDefault();
+              $('html, body').animate({
+                  // scrollTop: target.offset().top - 30
+                  scrollTop: target.offset().top+$('body').scrollTop()-10
+              }, 600);
+          }
+
+      });
+
+      $(document).on('click', '.openCitePopup', function() {
+        $(document.getElementById("citePopup")).fadeIn(200);
+      });
+
+      $(document).on('click', '#citePopup', function() {
+        if (!$(event.target).closest(document.getElementById("citePopupContent")).length) {
+          $(document.getElementById("citePopup")).fadeOut(200);
+        }
+      });
+
+      $(document.getElementById("closePopupIcon")).on('click', function() {
+          $(document.getElementById("citePopup")).fadeOut(200);
+      });
+
+      function loadAnimatedBackground() {
+        $("#animContainer").load("assets/include/animatedBackground.html"); 
+      }
+
+      init();
+
+      
+    </script>
+  </body>
+</html>
