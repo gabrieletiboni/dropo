@@ -98,7 +98,7 @@ E.g.:
 If you use this repository, please consider citing
 
 ```
-@article{tiboni2022dropo,
+@article{tiboni2023dropo,
 title = {DROPO: Sim-to-real transfer with offline domain randomization},
 journal = {Robotics and Autonomous Systems},
 pages = {104432},
