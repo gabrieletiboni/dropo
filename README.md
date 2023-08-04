@@ -17,9 +17,6 @@ We also evaluate the method on two zero-shot sim-to-real transfer scenarios, sho
 
 # Installation
 
-This repository makes use of the following external libraries:
-- [Nevergrad](https://github.com/facebookresearch/nevergrad)
-
 Dropo currently only supports gym environments registered with the old APIs gym<=0.25. Refer to the [compatibility](https://gymnasium.farama.org/content/gym_compatibility/) guidelines for running newly registered gym environments with this implementation.
 
 Install DROPO:
