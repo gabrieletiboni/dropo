@@ -829,7 +829,7 @@ class Dropo(object):
 			'tbpsa': ng.optimizers.TBPSA, # excellent for problems corrupted by noise, in particular overparameterized (neural) ones; very high num_workers ok).
 			'random': ng.optimizers.RandomSearch, # the classical random search baseline; don’t use softmax with this optimizer.
 			'meta': ng.optimizers.NGOpt, # “meta”-optimizer which adapts to the provided settings (budget, number of workers, parametrization) and should therefore be a good default.
-			'cma': ng.optimizers.CMA # CMA-ES (https://en.wikipedia.org/wiki/CMA-ES)
+			'cma': ng.optimizers._CMA # CMA-ES (https://en.wikipedia.org/wiki/CMA-ES)
 		}
 
 		if opt_string not in opts:
